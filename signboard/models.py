@@ -15,6 +15,7 @@ class Tram(models.Model):
     line = models.ForeignKey(Line, on_delete=models.CASCADE)
     full_seats = models.IntegerField()
     remaining_seats = models.IntegerField()
+    mins_left = models.IntegerField()
 
     def __str__(self):
         return "รถโดยสารรหัส {}".format(self.name)
