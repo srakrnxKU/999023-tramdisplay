@@ -55,6 +55,7 @@
     <body>
         <h1>รถโดยสารภายใน มหาวิทยาลัยเกษตรศาสตร์</h1>
         <div class="container-fluid">
+            <!--
             <div class="row">
                 <div class="col-md-2">
                 </div>
@@ -95,6 +96,36 @@
                     <div class="text">5</div>
                 </div>
             </div>
+            -->
+            <div class="row">
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-1">
+                    <div class="text">
+                        <span class="oi oi-clock"></span>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="text">
+                        <span class="oi oi-people"></span>
+                    </div>
+                </div>
+            </div>
+            {% for line in trams %}
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="line-number" style="background: {{ line.line_color }}">
+                            <span class="line" style="color: {{ line.line_text_color }}">{{ line.line_number }}</span>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="text">12</div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="text">5</div>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
     </body>
 </html>
