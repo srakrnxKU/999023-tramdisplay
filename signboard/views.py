@@ -9,7 +9,7 @@ from django.core import serializers
 
 def index(request):
     lines = Line.objects.all()
-    trams = {l: Tram.objects.filter(line=l) for l in lines}
+    trams = {l: Tram.objects.filter(line=l).order_by("mins_left")[:3] for l in lines}
     print(trams)
     return render(request, "signboard.html", {"trams": trams})
     # return HttpResponse("Hello!")
