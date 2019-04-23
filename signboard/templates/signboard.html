@@ -48,6 +48,15 @@
             text-align: center;
             font-size: 120px;
         }
+        .blink {
+            animation: blinker 1s linear infinite;
+        }
+
+        @keyframes blinker {
+            50% {
+                opacity: 0;
+            }
+        }
         </style>
     </head>
     <body>
@@ -124,7 +133,11 @@
                     </div>
                     {% for t in tram %}
                         <div class="col-md-3">
-                            <div class="text">{{ t.mins_left }} / {{ t.remaining_seats }}</div>
+                            {% if t.mins_left <= 3 %}
+                                <div class="text blink">{{ t.mins_left }} / {{ t.remaining_seats }}</div>
+                            {% else %}
+                                <div class="text">{{ t.mins_left }} / {{ t.remaining_seats }}</div>
+                            {% endif %}
                         </div>
                     {% endfor %}
                 </div>
