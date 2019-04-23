@@ -28,3 +28,16 @@ def get_tram(request, id):
             "line": {"number": tram.line.line_number},
         }
     )
+
+
+def set_tram_time(request, id, time):
+    tram = Tram.objects.get(pk=id)
+    tram.mins_left = time
+    tram.save()
+    return HttpResponse("done")
+
+def set_tram_seats(request, id, seats):
+    tram = Tram.objects.get(pk=id)
+    tram.remaining_seats = seats 
+    tram.save()
+    return HttpResponse("done")
