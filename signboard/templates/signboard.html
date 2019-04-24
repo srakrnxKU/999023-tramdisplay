@@ -20,7 +20,7 @@
             padding-bottom: 20px;
             background: #00796B;
             font-size: 36px;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
         .line-number{
             display: inline-block;
@@ -42,11 +42,14 @@
             background: #283593;
         }
         .row{
-            margin-top: -20px;
+            margin-top: -10px;
         }
         .text{
             text-align: center;
             font-size: 120px;
+        }
+        .congestion{
+            background: red;
         }
         .blink {
             animation: blinker 1s linear infinite;
@@ -132,6 +135,11 @@
                             <span class="line" style="color: {{ line.line_text_color }}">{{ line.line_number }}</span>
                         </div>
                     </div>
+                    {% if line.delay %}
+                        <div class="col-md-3">
+                                <div class="text congestion">ล่าช้า</div>
+                        </div>
+                    {% endif %}
                     {% for t in tram %}
                         <div class="col-md-3">
                             {% if t.mins_left <= 3 %}
