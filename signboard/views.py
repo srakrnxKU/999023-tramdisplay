@@ -69,3 +69,7 @@ def hide_alert(request):
     alert.shown = False
     alert.save()
     return HttpResponse("done")
+
+
+def routemap(request):
+    return render(request, "routemap.html")

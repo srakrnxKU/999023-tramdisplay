@@ -43,4 +43,4 @@ class Stop(models.Model):
     y = models.IntegerField()
 
     def __str__(self):
-        return "จุดจอด {}".format(name)
+        return "จุดจอด {}".format(self.name)
