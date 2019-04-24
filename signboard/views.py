@@ -11,7 +11,7 @@ from time import localtime, gmtime, strftime
 def index(request):
     lines = Line.objects.all()
     trams = {
-        l: Tram.objects.filter(line=l, mins_left__lte=15).order_by("mins_left")[:3]
+        l: Tram.objects.filter(line=l, mins_left__lte=15).order_by("mins_left")[:2]
         for l in lines
     }
     print(trams)
