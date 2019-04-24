@@ -72,9 +72,12 @@ def hide_alert(request):
 
 
 def routemap(request):
-    stops = Stop.objects.all()
-    return render(request, "routemap.html", {"stops": stops})
+    return render(request, "routemap.html")
 
+
+def routemap_divs(request):
+    stops = Stop.objects.all()
+    return render(request, "routemap_divs.html", {"stops": stops})
 
 def set_stop_waiting(request, id, waiting):
     stop = Stop.objects.get(pk=id)

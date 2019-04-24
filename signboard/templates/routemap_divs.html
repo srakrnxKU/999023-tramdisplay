@@ -1,0 +1,5 @@
+{% for stop in stops %}
+    <div class="stop" style="top: {{ stop.x }}%; left: {{ stop.y }}%;">
+        {{ stop.name }}<br/><span class="count">{{ stop.waiting }}</span>
+    </div> 
+{% endfor %}
