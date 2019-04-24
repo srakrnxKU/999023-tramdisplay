@@ -48,3 +48,24 @@ def set_tram_seats(request, id, seats):
     tram.remaining_seats = seats
     tram.save()
     return HttpResponse("done")
+
+
+def set_line_congestion(request, id, congestion):
+    line = Line.objects.get(pk=id)
+    line.delay = bool(congestion)
+    line.save()
+    return HttpResponse("done")
+
+
+def new_alert(request, text):
+    alert = SignAlert()
+    alert.text = text
+    alert.save()
+    return HttpResponse("done")
+
+
+def hide_alert(request):
+    alert = SignAlert.objects.order_by("-pk")[0]
+    alert.shown = False
+    alert.save()
+    return HttpResponse("done")
