@@ -45,7 +45,7 @@ def set_tram_time(request, id, time):
 
 def set_tram_seats(request, id, seats):
     tram = Tram.objects.get(pk=id)
-    tram.remaining_seats = seats
+    tram.occupied_seats = seats
     tram.save()
     return HttpResponse("done")
 
