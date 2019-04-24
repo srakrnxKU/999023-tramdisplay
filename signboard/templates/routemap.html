@@ -33,16 +33,17 @@
     <body>
         <div class="routemap">
             <img src="{% static 'routemap.jpg' %}"></img>
-            {% for stop in stops %}
-                <div class="stop" style="top: {{ stop.x }}%; left: {{ stop.y }}%;">
-                    {{ stop.name }}<br/><span class="count">{{ stop.waiting }}</span>
-                </div> 
-            {% endfor %}
+                {% for stop in stops %}
+                    <div class="stop" style="top: {{ stop.x }}%; left: {{ stop.y }}%;">
+                        {{ stop.name }}<br/><span class="count">{{ stop.waiting }}</span>
+                    </div> 
+                {% endfor %}
         </div>
     </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script type="text/javascript">
         setTimeout(function(){
             window.location.reload(1);
-        }, 5000);
+        }, 10000);
     </script>
 </html>
