@@ -7,6 +7,7 @@ class Line(models.Model):
     line_number = models.CharField(max_length=10, primary_key=True)
     line_color = models.CharField(max_length=24)
     line_text_color = models.CharField(max_length=24)
+    delay = models.BooleanField(default=False)
 
     def __str__(self):
         return "รถโดยสารสาย {}".format(self.line_number)
@@ -14,7 +15,7 @@ class Line(models.Model):
 
 class Tram(models.Model):
     name = models.CharField(max_length=20)
-    line = models.ForeignKey(Line, on_delete=models.CASCADE)
+    line = models.ForeignKey(Line, on_delete=models.CASCADE, null=True)
     full_seats = models.IntegerField()
     remaining_seats = models.IntegerField()
     mins_left = models.IntegerField()
