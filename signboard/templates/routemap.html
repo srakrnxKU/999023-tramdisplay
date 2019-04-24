@@ -39,17 +39,15 @@
     </body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script type="text/javascript">
-        setTimeout(function(){
+        function update(){
             $.ajax({
                 url: "divs",
             }).done(function(data) {
                 $("#stops").html(data);
             });
-        }, 3000);
-        $.ajax({
-            url: "divs",
-        }).done(function(data) {
-            $("#stops").html(data);
-        });
+            return false;
+        }
+        setInterval(update, 3000);
+        update();
     </script>
 </html>
