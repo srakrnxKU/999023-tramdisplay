@@ -13,12 +13,11 @@
             color: #fff;
             margin: 0px;
             padding: 0px;
-            text-align: center;
         }
-        h1{
-            margin: 0px;
-            padding: 10px;
-            display: block;
+        .topbar{
+            margin-top: 0px;
+            padding-top: 30px;
+            padding-bottom: 20px;
             background: #00796B;
             font-size: 36px;
             margin-bottom: 30px;
@@ -30,6 +29,7 @@
             width: 120px;
             height: 120px;
             border-radius: 50%;
+            text-align: center
         }
         .line-number .line{
             position: relative;
@@ -48,6 +48,9 @@
             text-align: center;
             font-size: 120px;
         }
+        .text-smaller{
+            font-size: 80px;
+        }
         .blink {
             animation: blinker 1s linear infinite;
         }
@@ -60,7 +63,19 @@
         </style>
     </head>
     <body>
-        <h1>รถโดยสารภายใน มหาวิทยาลัยเกษตรศาสตร์ ที่จะมาถึงใน 15 นาทึ</h1>
+        <div class="container-fluid topbar">
+            <div class="row">
+                <div class="col-md-4" style="font-weight: bold;">
+                    จุดจอดสำนักบริการคอมพิวเตอร์
+                </div>
+                <div class="col-md-4" style="font-weight: bold; text-align: center">
+                    {{ time }}
+                </div>
+                <div class="col-md-4" style="text-align: right">
+                    แสดง เวลาที่รถจะมา (นาที) / ที่นั่งว่าง 
+                </div>
+            </div>
+        </div>
         <div class="container-fluid">
             <!--
             <div class="row">
@@ -107,19 +122,8 @@
             <div class="row">
                 <div class="col-md-3">
                 </div>
-                <div class="col-md-3">
-                    <div class="text">
-                        <span class="oi oi-clock"></span> / <span class="oi oi-people"></span>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="text">
-                        <span class="oi oi-clock"></span> / <span class="oi oi-people"></span>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="text">
-                        <span class="oi oi-clock"></span> / <span class="oi oi-people"></span>
+                <div class="col-md-9">
+                    <div class="text-smaller">
                     </div>
                 </div>
             </div>

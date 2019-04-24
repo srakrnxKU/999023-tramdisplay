@@ -3,6 +3,7 @@ from django.http import HttpResponse, JsonResponse
 from django.db.models import Min
 from .models import Tram, Line
 from django.core import serializers
+from time import localtime, gmtime, strftime
 
 # Create your views here.
 
@@ -14,7 +15,11 @@ def index(request):
         for l in lines
     }
     print(trams)
-    return render(request, "signboard.html", {"trams": trams})
+    return render(
+        request,
+        "signboard.html",
+        {"trams": trams, "time": strftime("%H:%M", localtime())},
+    )
     # return HttpResponse("Hello!")
 
 
@@ -36,8 +41,10 @@ def set_tram_time(request, id, time):
     tram.save()
     return HttpResponse("done")
 
+
 def set_tram_seats(request, id, seats):
+
     tram = Tram.objects.get(pk=id)
-    tram.remaining_seats = seats 
+    tram.remaining_seats = seats
     tram.save()
     return HttpResponse("done")
