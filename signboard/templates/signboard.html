@@ -112,9 +112,11 @@
                     </div>
                 {% endfor %}
             </div>
-            <div class="bottombar">
-                เฮือก
-            </div>
+            {% if alert.shown %}
+                <div class="bottombar">
+                    {{ alert.text }}
+                </div>
+            {% endif %}
     </body>
     <script type="text/javascript">
         setTimeout(function(){

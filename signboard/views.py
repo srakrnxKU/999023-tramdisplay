@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.db.models import Min
-from .models import Tram, Line
+from .models import Tram, Line, SignAlert
 from django.core import serializers
 from time import localtime, gmtime, strftime
 
@@ -14,11 +14,12 @@ def index(request):
         l: Tram.objects.filter(line=l, mins_left__lte=15).order_by("mins_left")[:2]
         for l in lines
     }
+    alert = SignAlert.objects.order_by("-pk")[0]
     print(trams)
     return render(
         request,
         "signboard.html",
-        {"trams": trams, "time": strftime("%H:%M", localtime())},
+        {"trams": trams, "alert": alert, "time": strftime("%H:%M", localtime())},
     )
     # return HttpResponse("Hello!")
 
