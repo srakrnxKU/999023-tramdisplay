@@ -29,7 +29,7 @@ DEBUG = True
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 s.connect(("8.8.8.8", 80))
 
-ALLOWED_HOSTS = [s.getsockname()[0], "localhost"]
+ALLOWED_HOSTS = [s.getsockname()[0], "localhost", "kutram.herokuapp.com"]
 
 s.close()
 
