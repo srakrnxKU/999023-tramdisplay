@@ -22,6 +22,16 @@
             font-size: 36px;
             margin-bottom: 20px;
         }
+        .bottombar{
+            position: absolute;
+            bottom: 0px;
+            left: 0px;
+            width: 100%;
+            padding: 10px 0px;
+            background: #00796B;
+            font-size: 48px;
+            text-align: center;
+        }
         .line-number{
             display: inline-block;
             vertical-align: -10%;
@@ -63,99 +73,52 @@
         </style>
     </head>
     <body>
-        <div class="container-fluid topbar">
-            <div class="row">
-                <div class="col-md-4" style="font-weight: bold;">
-                    จุดจอดสำนักบริการคอมพิวเตอร์
-                </div>
-                <div class="col-md-4" style="font-weight: bold; text-align: center">
-                    {{ time }}
-                </div>
-                <div class="col-md-4" style="text-align: right">
-                    แสดง เวลาที่รถจะมา (นาที) / ที่นั่งว่าง 
-                </div>
-            </div>
-        </div>
-        <div class="container-fluid">
-            <!--
-            <div class="row">
-                <div class="col-md-2">
-                </div>
-                <div class="col-md-1">
-                    <div class="text">
-                        <span class="oi oi-clock"></span>
-                    </div>
-                </div>
-                <div class="col-md-1">
-                    <div class="text">
-                        <span class="oi oi-people"></span>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-2">
-                    <div class="line-number red">
-                        <span class="line">1</span>
-                    </div>
-                </div>
-                <div class="col-md-1">
-                    <div class="text">12</div>
-                </div>
-                <div class="col-md-1">
-                    <div class="text">5</div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-2">
-                    <div class="line-number blue">
-                        <span class="line">2</span>
-                    </div>
-                </div>
-                <div class="col-md-1">
-                    <div class="text">12</div>
-                </div>
-                <div class="col-md-1">
-                    <div class="text">5</div>
-                </div>
-            </div>
-            -->
-            <div class="row">
-                <div class="col-md-3">
-                </div>
-                <div class="col-md-9">
-                    <div class="text-smaller">
-                    </div>
-                </div>
-            </div>
-            {% for line, tram in trams.items %}
+            <div class="container-fluid topbar">
                 <div class="row">
-                    <div class="col-md-3">
-                        <span class="text">สาย </span>
-                        <div class="line-number" style="background: {{ line.line_color }}">
-                            <span class="line" style="color: {{ line.line_text_color }}">{{ line.line_number }}</span>
-                        </div>
+                    <div class="col-md-4" style="font-weight: bold;">
+                        จุดจอดสำนักบริการคอมพิวเตอร์
                     </div>
-                    {% if line.delay %}
-                        <div class="col-md-3">
-                                <div class="text congestion">ล่าช้า</div>
-                        </div>
-                    {% endif %}
-                    {% for t in tram %}
-                        <div class="col-md-3">
-                            {% if t.mins_left <= 3 %}
-                                <div class="text blink">{{ t.mins_left }} / {{ t.remaining_seats }}</div>
-                            {% else %}
-                                <div class="text">{{ t.mins_left }} / {{ t.remaining_seats }}</div>
-                            {% endif %}
-                        </div>
-                    {% endfor %}
+                    <div class="col-md-4" style="font-weight: bold; text-align: center">
+                        {{ time }}
+                    </div>
+                    <div class="col-md-4" style="text-align: right">
+                        แสดง เวลาที่รถจะมา (นาที) / ที่นั่งว่าง 
+                    </div>
                 </div>
-            {% endfor %}
-        </div>
+            </div>
+            <div class="container-fluid" style="flex-grow: 1;">
+                {% for line, tram in trams.items %}
+                    <div class="row">
+                        <div class="col-md-3">
+                            <span class="text">สาย </span>
+                            <div class="line-number" style="background: {{ line.line_color }}">
+                                <span class="line" style="color: {{ line.line_text_color }}">{{ line.line_number }}</span>
+                            </div>
+                        </div>
+                        {% if line.delay %}
+                            <div class="col-md-3">
+                                    <div class="text congestion">ล่าช้า</div>
+                            </div>
+                        {% endif %}
+                        {% for t in tram %}
+                            <div class="col-md-3">
+                                {% if t.mins_left <= 3 %}
+                                    <div class="text blink">{{ t.mins_left }} / {{ t.remaining_seats }}</div>
+                                {% else %}
+                                    <div class="text">{{ t.mins_left }} / {{ t.remaining_seats }}</div>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="bottombar">
+                เฮือก
+            </div>
     </body>
     <script type="text/javascript">
         setTimeout(function(){
-            window.location.reload(1);
+            // window.location.reload(1);
         }, 5000);
     </script>
 </html>
