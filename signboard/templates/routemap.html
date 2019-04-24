@@ -8,7 +8,6 @@
             body{
                 margin: 0px;
                 font-family: sans-serif;
-                font-size: 18px;
                 overflow: hidden;
             }
             .routemap{
@@ -20,18 +19,25 @@
             .routemap img{
                 height: 100%;
             }
-            .line{
+            .stop{
                 position: absolute;
                 color: #fff;
                 background: #000;
                 padding: 5px;
+            }
+            .stop .count{
+                font-size: 18px;
             }
         </style>
     </head>
     <body>
         <div class="routemap">
             <img src="{% static 'routemap.jpg' %}"></img>
-            <div class="line" style="top: 100px; left: 50px;">123</div> 
+            {% for stop in stops %}
+                <div class="stop" style="top: {{ stop.x }}%; left: {{ stop.y }}%;">
+                    {{ stop.name }}<br/><span class="count">{{ stop.waiting }}</span>
+                </div> 
+            {% endfor %}
         </div>
     </body>
 </html>
