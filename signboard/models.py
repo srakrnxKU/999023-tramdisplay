@@ -34,3 +34,11 @@ class SignAlert(models.Model):
 
     def __str__(self):
         return self.text
+
+
+class Stop(models.Model):
+    name = models.CharField(max_length=50)
+    waiting = models.IntegerField()
+    x = models.IntegerField()
+    y = models.IntegerField()
+    
