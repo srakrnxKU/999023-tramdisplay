@@ -22,3 +22,11 @@ class Tram(models.Model):
 
     def __str__(self):
         return "รถโดยสารรหัส {}".format(self.name)
+
+
+class SignAlert(models.Model):
+    text = models.CharField(max_length=140)
+    shown = models.BooleanField()
+
+    def __str__(self):
+        return self.text
