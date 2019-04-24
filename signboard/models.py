@@ -26,7 +26,7 @@ class Tram(models.Model):
 
 class SignAlert(models.Model):
     text = models.CharField(max_length=140)
-    shown = models.BooleanField()
+    shown = models.BooleanField(default=True)
 
     def __str__(self):
         return self.text
