@@ -22,7 +22,7 @@ class Tram(models.Model):
 
     def __str__(self):
         return "รถโดยสารรหัส {}".format(self.name)
-    
+
     @property
     def remaining_seats(self):
         return self.full_seats - self.occupied_seats
@@ -41,4 +41,6 @@ class Stop(models.Model):
     waiting = models.IntegerField()
     x = models.IntegerField()
     y = models.IntegerField()
-    
+
+    def __str__(self):
+        return "จุดจอด {}".format(name)
