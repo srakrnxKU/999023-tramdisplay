@@ -14,5 +14,10 @@ urlpatterns = [
     path("alert/new/<text>", views.new_alert, name="new_alert"),
     path("alert/hide", views.hide_alert, name="hide_alert"),
     path("routemap/", views.routemap, name="routemap"),
+    path(
+        "stop/<id>/set/waiting/<int:waiting>",
+        views.set_stop_waiting,
+        name="set_stop_waiting",
+    ),
 ]
 

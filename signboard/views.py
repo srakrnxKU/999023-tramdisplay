@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.db.models import Min
-from .models import Tram, Line, SignAlert
+from .models import Tram, Line, SignAlert, Stop
 from django.core import serializers
 from time import localtime, gmtime, strftime
 
@@ -72,4 +72,13 @@ def hide_alert(request):
 
 
 def routemap(request):
-    return render(request, "routemap.html")
+    stops = Stop.objects.all()
+    return render(request, "routemap.html", {"stops": stops})
+
+
+def set_stop_waiting(request, id, waiting):
+    stop = Stop.objects.get(pk=id)
+    stop.waiting = waiting
+    stop.save()
+    return HttpResponse("{}: {}".format(stop.name, stop.waiting))
+
