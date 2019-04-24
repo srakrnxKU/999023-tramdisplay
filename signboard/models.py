@@ -17,11 +17,15 @@ class Tram(models.Model):
     name = models.CharField(max_length=20)
     line = models.ForeignKey(Line, on_delete=models.CASCADE, null=True)
     full_seats = models.IntegerField()
-    remaining_seats = models.IntegerField()
+    occupied_seats = models.IntegerField()
     mins_left = models.IntegerField()
 
     def __str__(self):
         return "รถโดยสารรหัส {}".format(self.name)
+    
+    @property
+    def remaining_seats(self):
+        return self.full_seats - self.occupied_seats
 
 
 class SignAlert(models.Model):
