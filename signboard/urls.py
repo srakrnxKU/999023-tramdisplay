@@ -20,5 +20,6 @@ urlpatterns = [
         views.set_stop_waiting,
         name="set_stop_waiting",
     ),
+    path("assistant", views.assistant, name="assistant"),
 ]
 

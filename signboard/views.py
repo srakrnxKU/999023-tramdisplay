@@ -1,9 +1,11 @@
+from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.db.models import Min
 from .models import Tram, Line, SignAlert, Stop
 from django.core import serializers
 from time import localtime, gmtime, strftime
+import json
 
 # Create your views here.
 
@@ -79,9 +81,37 @@ def routemap_divs(request):
     stops = Stop.objects.all()
     return render(request, "routemap_divs.html", {"stops": stops})
 
+
 def set_stop_waiting(request, id, waiting):
     stop = Stop.objects.get(pk=id)
     stop.waiting = waiting
     stop.save()
     return HttpResponse("{}: {}".format(stop.name, stop.waiting))
 
+
+@csrf_exempt
+def assistant(request):
+    if request.method == "POST":
+        data = json.loads(request.body)
+        intent = data["queryResult"]["intent"]["displayName"]
+        if intent == "Arrival time":
+            tram = Tram.objects.order_by("mins_left")[0]
+            text = "The nearest bus to arrive is for Line {} and will arrive in {} minutes.".format(
+                tram.line.line_number, tram.mins_left
+            )
+            print(text)
+        elif intent == "Default Welcome Intent":
+            text = "Hello! How can I help?"
+        else:
+            text = "Sorry, I don't understand."
+    else:
+        text = "Sorry, I don't understand."
+    json_structure = {
+        "fulfillmentText": text,
+        "payload": {
+            "google": {
+                "richResponse": {"items": [{"simpleResponse": {"textToSpeech": text}}]}
+            }
+        },
+    }
+    return JsonResponse(json_structure)
