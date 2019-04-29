@@ -96,7 +96,7 @@ def assistant(request):
         intent = data["queryResult"]["intent"]["displayName"]
         if intent == "Arrival time":
             tram = Tram.objects.order_by("mins_left")[0]
-            text = "The nearest bus for line {}, and will arrive in {} minutes.".format(
+            text = "The nearest bus is for line {}, and will arrive in {} minutes.".format(
                 tram.line.line_number, tram.mins_left
             )
             print(text)
