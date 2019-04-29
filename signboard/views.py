@@ -96,12 +96,24 @@ def assistant(request):
         intent = data["queryResult"]["intent"]["displayName"]
         if intent == "Arrival time":
             tram = Tram.objects.order_by("mins_left")[0]
-            text = "The nearest bus to arrive is for Line {} and will arrive in {} minutes.".format(
+            text = "The nearest bus for line {}, and will arrive in {} minutes.".format(
                 tram.line.line_number, tram.mins_left
             )
             print(text)
-        elif intent == "Default Welcome Intent":
-            text = "Hello! How can I help?"
+        elif intent == "Specified line":
+            line_number = int(data["queryResult"]["parameters"]["lineNumber"])
+            trams = Tram.objects.filter(line=line_number, mins_left__lte=15).order_by(
+                "mins_left"
+            )
+            if trams.count() == 0:
+                text = "No bus for line number {} will arrive in 15 minutes.".format(
+                    line_number
+                )
+            else:
+                tram = trams[0]
+                text = "Bus line {} will arrive in {} minutes.".format(
+                    tram.line.line_number, tram.mins_left
+                )
         else:
             text = "Sorry, I don't understand."
     else:
