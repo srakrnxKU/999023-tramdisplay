@@ -99,21 +99,23 @@ def assistant(request):
             text = "The nearest bus is for line {}, and will arrive in {} minutes.".format(
                 tram.line.line_number, tram.mins_left
             )
-            print(text)
         elif intent == "Specified line":
-            line_number = int(data["queryResult"]["parameters"]["lineNumber"])
-            trams = Tram.objects.filter(line=line_number, mins_left__lte=15).order_by(
-                "mins_left"
-            )
-            if trams.count() == 0:
-                text = "No bus for line number {} will arrive in 15 minutes.".format(
-                    line_number
+            try:
+                line_number = int(data["queryResult"]["parameters"]["lineNumber"])
+                trams = Tram.objects.filter(line=line_number, mins_left__lte=15).order_by(
+                    "mins_left"
                 )
-            else:
-                tram = trams[0]
-                text = "Bus line {} will arrive in {} minutes.".format(
-                    tram.line.line_number, tram.mins_left
-                )
+                if trams.count() == 0:
+                    text = "No bus for line number {} will arrive in 15 minutes.".format(
+                        line_number
+                    )
+                else:
+                    tram = trams[0]
+                    text = "Bus line {} will arrive in {} minutes.".format(
+                        tram.line.line_number, tram.mins_left
+                    )
+            except ValueError:
+                text = "I don't get the bus line. Would you like to try again?"
         else:
             text = "Sorry, I don't understand."
     else:
